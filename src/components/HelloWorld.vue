@@ -1,22 +1,31 @@
 <template>
   <div class="hello">
-    
+    <div class="f" v-for="(item, index) in data" :key="index">
+      {{item.title}}<br>
+      <a target="_blank" :href="'https://en.wikipedia.org/?curid=' + item.pageid">{{'https://en.wikipedia.org/?curid=' + item.pageid}}</a><br>
+      {{item.snippet}}
+      <hr />
+    </div>
   </div>
 </template>
 
 <script>
-import  { } from 'vue'
+import  { ref } from 'vue'
 import axios from 'axios'
 export default {
   setup() {
 
-    axios.get('https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=food&gsrlimit=40&prop=pageimages|extracts&exchars=30&exintro&explaintext&exlimit=max&format=json&origin=*')
+    const data = ref([])
+    const url = ref('')
+
+    axios.get('https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=javascript')
     .then(res => {
-      console.log(res)
+      console.log(res.data.query.search)
+      data.value = res.data.query.search
     })
 
 
-    return{ }
+    return{ data, url }
   }
 }
 </script>
