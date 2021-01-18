@@ -1,14 +1,12 @@
 <template>
   <div class="hello">
     <form @submit.prevent="searchFunction">
-      <input v-model="search" type="text" name="" id="">
+      <input v-model="search" placeholder="Search Voogle" type="text" name="" id="">
     </form>
-    <h3>Results for <span>"{{search}}"</span></h3>
-    <div class="f" v-for="(item, index) in data" :key="index">
-      {{item.title}}<br>
-      <a target="_blank" :href="`https://en.wikipedia.org/?curid=${item.pageid}`">{{'https://en.wikipedia.org/?curid=' + item.pageid}}</a><br>
-      {{item.snippet}}
-      <hr />
+    <div class="searches" v-for="(item, index) in data" :key="index">
+      <h2>{{item.title}}</h2>
+      <a target="_blank" :href="`https://en.wikipedia.org/?curid=${item.pageid}`">{{'https://en.wikipedia.org/?curid=' + item.pageid}}</a>
+      <p>{{item.snippet}}</p>
     </div>
     <div v-if="isLoading">Loading...</div>
 
@@ -43,20 +41,33 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+
+form{
+  width: 100%;
+  margin-bottom: 50px
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+form input{
+  width: 100%;
+  padding: 20px;
+  border-radius: 100px;
+  border: none;
+  background: #F3F3F3;
+  outline: none;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+::placeholder{
+  color: #8CD0B2
 }
 a {
   color: #42b983;
 }
+.searches{
+  padding: 20px;
+  width: 100%;
+  background: #35495E;
+  color: white;
+  border-radius: 40px;
+  margin: 20px 0
+}
+
 </style>
