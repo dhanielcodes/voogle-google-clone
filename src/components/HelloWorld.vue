@@ -10,27 +10,35 @@
       {{item.snippet}}
       <hr />
     </div>
+    <div v-if="isLoading">Loading...</div>
+
   </div>
 </template>
 
 <script>
-import  { ref } from 'vue'
+import  { ref, watch } from 'vue'
 import axios from 'axios'
 export default {
   setup() {
 
     const data = ref([])
     const search = ref('')
+    const isLoading = ref(false)
     function searchFunction(){
+      isLoading.value = true
       axios.get('https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=' + search.value)
       .then(res => {
-        console.log(res.data.query.search)
         data.value = res.data.query.search
+        isLoading.value = false
       })
     }
 
+    watch(search, () => {
+      searchFunction()
+    })
 
-    return{ data, search, searchFunction }
+
+    return{ data, search, searchFunction, isLoading }
   }
 }
 </script>
