@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <form @submit.prevent="searchFunction">
       <input v-model="search" placeholder="Search Voogle" type="text" name="" id="">
     </form>
@@ -44,8 +44,8 @@ export default {
 <style scoped>
 
 form{
+  margin-bottom: 50px;
   width: 100%;
-  margin-bottom: 50px
 }
 form input{
   width: 100%;
@@ -62,12 +62,17 @@ a {
   color: #42b983;
 }
 .searches{
-  padding: 20px;
+  padding: 40px;
   width: 100%;
   background: #35495E;
   color: white;
   border-radius: 40px;
   margin: 20px 0
 }
-
+.searches h2{
+  margin-bottom: 10px;
+}
+.searches p{
+  margin-top: 20px;
+}
 </style>
